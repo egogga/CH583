@@ -85,12 +85,12 @@ static uint8_t scanRspData[] = {
     // complete name
     0x12, // length of this data
     GAP_ADTYPE_LOCAL_NAME_COMPLETE,
-    'S',
-    'i',
-    'm',
-    'p',
-    'l',
+    'H',
     'e',
+    'l',
+    'l',
+    'o',
+    ' ',
     ' ',
     'P',
     'e',
