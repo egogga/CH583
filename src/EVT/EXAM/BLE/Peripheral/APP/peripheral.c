@@ -16,6 +16,7 @@
 #include "devinfoservice.h"
 #include "gattprofile.h"
 #include "peripheral.h"
+#include "CH58x_gpio.h"
 
 /*********************************************************************
  * MACROS
@@ -85,8 +86,8 @@ static uint8_t scanRspData[] = {
     // complete name
     0x12, // length of this data
     GAP_ADTYPE_LOCAL_NAME_COMPLETE,
-    'H',
-    'e',
+    'Y',
+    'o',
     'l',
     'l',
     'o',
@@ -135,7 +136,7 @@ static uint8_t advertData[] = {
 };
 
 // GAP GATT Attributes
-static uint8_t attDeviceName[GAP_DEVICE_NAME_LEN] = "Simple Peripheral";
+static uint8_t attDeviceName[GAP_DEVICE_NAME_LEN] = "YoYo Peripheral";
 
 // Connection item list
 static peripheralConnItem_t peripheralConnList;
@@ -588,6 +589,7 @@ static void peripheralStateNotificationCB(gapRole_States_t newState, gapRoleEven
                 Peripheral_LinkTerminated(pEvent);
                 PRINT("Disconnected.. Reason:%x\n", pEvent->linkTerminate.reason);
                 PRINT("Advertising..\n");
+                //GPIOB_SetBits(GPIO_Pin_18);
             }
             else if(pEvent->gap.opcode == GAP_MAKE_DISCOVERABLE_DONE_EVENT)
             {
@@ -600,6 +602,8 @@ static void peripheralStateNotificationCB(gapRole_States_t newState, gapRoleEven
             {
                 Peripheral_LinkEstablished(pEvent);
                 PRINT("Connected..\n");
+                //GPIOB_SetBits(GPIO_Pin_18);
+                GPIOB_ResetBits(GPIO_Pin_18);// §Á §ß§Ñ§á§Ú§ã§Ñ§Ý §ï§ä§à
             }
             break;
 
@@ -619,6 +623,7 @@ static void peripheralStateNotificationCB(gapRole_States_t newState, gapRoleEven
             {
                 Peripheral_LinkTerminated(pEvent);
                 PRINT("Disconnected.. Reason:%x\n", pEvent->linkTerminate.reason);
+                GPIOB_SetBits(GPIO_Pin_18);// §Á §ß§Ñ§á§Ú§ã§Ñ§Ý §ï§ä§à
             }
             else if(pEvent->gap.opcode == GAP_LINK_ESTABLISHED_EVENT)
             {
@@ -732,6 +737,9 @@ static void simpleProfileChangeCB(uint8_t paramID, uint8_t *pValue, uint16_t len
             break;
     }
 }
+
+
+/* General Purpose I/O */
 
 /*********************************************************************
 *********************************************************************/

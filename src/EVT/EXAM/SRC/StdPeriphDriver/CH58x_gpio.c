@@ -251,3 +251,5 @@ void GPIOAGPPCfg(FunctionalState s, uint16_t perph)
         R16_PIN_ANALOG_IE &= ~perph;
     }
 }
+
+

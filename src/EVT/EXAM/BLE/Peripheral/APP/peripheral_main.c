@@ -61,6 +61,7 @@ int main(void)
 #ifdef DEBUG
     GPIOA_SetBits(bTXD1);
     GPIOA_ModeCfg(bTXD1, GPIO_ModeOut_PP_5mA);
+    GPIOB_ModeCfg( GPIO_Pin_18, GPIO_ModeOut_PP_5mA );//§Á §ß§Ñ§á§Ú§ã§Ñ§Ý §ï§ä§à
     UART1_DefInit();
 #endif
     PRINT("%s\n", VER_LIB);
@@ -70,5 +71,6 @@ int main(void)
     Peripheral_Init();
     Main_Circulation();
 }
+
 
 /******************************** endfile @ main ******************************/
